@@ -4,6 +4,7 @@ type IconsProps = {
  surahId: string | number | undefined;
  ayahNumber: number;
  ayah: string;
+ isLoading: boolean;
  onCopy: (text: string) => void;
  onSave: (text: string) => void;
  onPlay: (surahId: string, ayahNumber: number) => void;
@@ -11,6 +12,7 @@ type IconsProps = {
 };
 
 export default function Icons(props: IconsProps) {
+
  return (
 
   <div class="flex items-center justify-between mb-6">
