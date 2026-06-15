@@ -42,10 +42,10 @@ export default function SurahPreview() {
        {(surah, index) => (
         <div
          onClick={() => navigate(`/surah/${index() + 1}`)}
-         class="bg-gray-900 border border-teal-800 rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer hover:bg-teal-900 transition-all duration-300"
+         class="bg-[#171717] border border-gray-50 hover:border-teal-500  rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all duration-300"
         >
-         <div class="w-9 h-9 rounded-full bg-teal-500 flex items-center justify-center">
-          <span class="text-black font-bold text-sm">
+         <div class="w-9 h-9 rounded-full bg-gray-200  flex items-center justify-center">
+          <span class="text-black font-bold text-lg">
            {index() + 1}
           </span>
          </div>

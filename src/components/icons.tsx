@@ -1,10 +1,12 @@
 import { Bookmark, Copy, Pause, Play, Share2 } from "lucide-solid";
+import { Show } from "solid-js";
 
 type IconsProps = {
  surahId: string | number | undefined;
  ayahNumber: number;
  ayah: string;
  isLoading: boolean;
+ isPlaying: boolean;
  onCopy: (text: string) => void;
  onSave: (text: string) => void;
  onPlay: (surahId: string, ayahNumber: number) => void;
@@ -21,22 +23,21 @@ export default function Icons(props: IconsProps) {
      {props.surahId}:{props.ayahNumber}
     </span>
 
-    <Play
-     onClick={() =>
-      props.onPlay(
-       props.surahId as string,
-       props.ayahNumber
-      )
+    <Show when={props.isPlaying}
+     fallback={
+      <Play
+       size={25}
+       onClick={() => props.onPlay(props.surahId as string, props.ayahNumber)}
+       class="hover:text-teal-400 transition-all cursor-pointer"
+      />
      }
-     size={25}
-     class="hover:text-teal-400 transition-all cursor-pointer"
-    />
-
-    <Pause
-     onClick={() => props.stopAudio()}
-     size={25}
-     class="hover:text-teal-400 transition-all cursor-pointer"
-    />
+    >
+     <Pause
+      onClick={props.stopAudio}
+      size={25}
+      class="hover:text-teal-400 transition-all cursor-pointer"
+     />
+    </Show>
 
     <Bookmark
      onClick={() => props.onSave(props.ayah)}
@@ -58,6 +59,6 @@ export default function Icons(props: IconsProps) {
      class="text-gray-400 hover:text-teal-400 transition-all cursor-pointer"
     />
    </div>
-  </div>
+  </div >
  );
 }
