@@ -3,19 +3,26 @@ import { BookOpen } from "lucide-solid";
 import { createResource, createSignal, For, Show } from "solid-js";
 import { toast } from "solid-sonner";
 import { getSurah, pauseAudio, playAudio } from "../../api/data";
-import { tafseerKather } from "../../api/tafseer";
+import { tafseerKather, tafsirQurtubi } from "../../api/tafseer";
 import Icons from "../../components/icons";
 import TafsirPage from "../../components/tafseer/tafseer";
 
 export default function SurahPage() {
  const params = useParams();
-
- const [ayahs] = createResource(() => params.id, getSurah);
- const [tafseer] = createResource(() => params.id || "", tafseerKather);
-
-
  const [open, setOpen] = createSignal(false);
  const [selectedAyah, setSelectedAyah] = createSignal(1);
+
+ const [ayahs] = createResource(() => params.id, getSurah);
+
+ const [tafseerKathir] = createResource(
+  () => params.id,
+  tafseerKather
+ );
+
+ const [qurtubi] = createResource(
+  () => ({ surah: params.id, ayah: selectedAyah() }),
+  ({ surah, ayah }) => tafsirQurtubi(surah, ayah)
+ );
 
  const copyAyah = async (text: string) => {
   try {
@@ -32,8 +39,7 @@ export default function SurahPage() {
  };
 
  const getTafsirKathir = () => {
-  const data = tafseer();
-
+  const data = tafseerKathir();
   if (!data?.data?.verses) return null;
 
   return data.data.verses.find(
@@ -91,8 +97,11 @@ export default function SurahPage() {
     onClose={() => setOpen(false)}
     selectedAyah={selectedAyah}
     tafsirKathir={getTafsirKathir}
-    loading={tafseer.loading}
-    error={tafseer.error}
+    surahName={qurtubi()?.data?.surah?.name}
+    surahNumber={params.id}
+    qurtubi={qurtubi}
+    loading={tafseerKathir.loading}
+    error={tafseerKathir.error}
    />
 
   </div>

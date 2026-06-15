@@ -1,6 +1,15 @@
-import { Show } from "solid-js";
+import { createSignal, Show } from "solid-js";
 
 export default function TafsirSheet(props: any) {
+ const [selected, setSelected] = createSignal("kathir");
+
+ const currentTafsir = () => {
+  if (selected() === "kathir") return props.tafsirKathir();
+  if (selected() === "qurtubi") return props.qurtubi?.();
+
+  return null;
+ };
+
  return (
   <Show when={props.open()}>
 
@@ -9,15 +18,13 @@ export default function TafsirSheet(props: any) {
     onClick={props.onClose}
    />
 
-   {/* Page in surah[id] */}
    <div class="fixed bottom-0 left-0 right-0 z-50 bg-[#1e1e1e] rounded-t-2xl p-4 h-[70vh] overflow-y-auto pb-10">
 
     <div class="w-12 h-1.5 bg-gray-600 rounded-full mx-auto mb-4" />
 
-    {/* Header */}
     <div class="flex justify-between items-center mb-4">
      <h2 class="text-white text-xl font-bold">
-      Tafsir Ayah {props.selectedAyah()}
+      Ayah {props.selectedAyah()}
      </h2>
 
      <button
@@ -28,18 +35,30 @@ export default function TafsirSheet(props: any) {
      </button>
     </div>
 
-    {/* Button */}
-    <div class="flex flex-col items-center gap-3 w-full mb-4">
-     <hr class="border-gray-700 border-t-2 w-full" />
+    <div class="flex gap-3 mb-4 justify-center">
+     <button
+      class="px-4 py-2 rounded-full text-sm font-semibold"
+      classList={{
+       "bg-blue-600 text-white": selected() === "kathir",
+       "bg-[#343a40] text-[#dee2e6]": selected() !== "kathir",
+      }}
+      onClick={() => setSelected("kathir")}
+     >
+      Ibn Kathir
+     </button>
 
-     <button class="px-4 py-2 rounded-full bg-[#343a40] text-[#dee2e6] font-semibold
-      hover:bg-[#495057] hover:text-white transition-colors
-      active:scale-95 duration-150 whitespace-nowrap">
-      Tafsir Al-Muyassar
+     <button
+      class="px-4 py-2 rounded-full text-sm font-semibold"
+      classList={{
+       "bg-blue-600 text-white": selected() === "qurtubi",
+       "bg-[#343a40] text-[#dee2e6]": selected() !== "qurtubi",
+      }}
+      onClick={() => setSelected("qurtubi")}
+     >
+      Al-Qurtubi
      </button>
     </div>
 
-    {/* Tafsir Content */}
     <Show when={props.loading}>
      <p class="text-gray-400">Loading tafsir...</p>
     </Show>
@@ -48,11 +67,18 @@ export default function TafsirSheet(props: any) {
      <p class="text-red-400">Failed to load tafsir</p>
     </Show>
 
-    <Show when={props.tafsirKathir()}>
+    {/* content */}
+    <Show when={currentTafsir()}>
      <div class="text-gray-300 leading-[3.5rem] text-xl font-bold font-serif  opacity-85 whitespace-pre-line mb-20 mt-6">
+
       <span class="text-teal-400 font-bold text-lg">
-       ({props.tafsirKathir().aya || props.tafsirKathir().ayah})</span>
-      <p>{props.tafsirKathir().text}</p>
+       ({currentTafsir().aya || currentTafsir().ayah})
+      </span>
+
+      <p class="mt-2">
+       {currentTafsir().text || currentTafsir().translation}
+      </p>
+
      </div>
     </Show>
 

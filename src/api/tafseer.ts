@@ -12,17 +12,17 @@ export const tafseerKather = async (id: string) => {
  return data;
 };
 
-export const tafseerMuyasser = async (id: string) => {
- console.log("TAFSEER API CALLED:", id);
 
+export const tafsirQurtubi = async (surah: string, ayah: number) => {
  const res = await fetch(
-  `https://quranenc.com/api/v1/translation/aya/arabic_moyassar/${id}`
+  `https://api.alquran.cloud/v1/ayah/${surah}:${ayah}/ar.qurtubi`
  );
+
+ if (!res.ok) {
+  throw new Error("Failed to load Qurtubi tafsir");
+ }
 
  const data = await res.json();
 
- console.log("TAFSEER DATA:", data);
-
- return data;
+ return data.data;
 };
-
