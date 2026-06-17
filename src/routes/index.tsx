@@ -1,5 +1,5 @@
-import Search from "~/components/search";
 import SurahPreview from "~/components/surahPreview";
+import SurahSearch from "../routes/search";
 
 export default function Home() {
  return (
@@ -14,7 +14,7 @@ export default function Home() {
       اقْرَؤُوا القُرْآنَ فإنَّه يَأْتي يَومَ القِيامَةِ
       شَفِيعًا لأَصْحابِهِ
      </p>
-     <Search />
+     <SurahSearch />
     </div>
    </section>
 
