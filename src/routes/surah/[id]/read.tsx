@@ -1,0 +1,76 @@
+import { useNavigate, useParams } from "@solidjs/router";
+import { ArrowLeft } from "lucide-solid";
+import { createResource, For, Show } from "solid-js";
+
+import { getSurah } from "../../../api/data";
+import { data } from "../../../api/surahname";
+
+export default function Read() {
+ const params = useParams();
+ const navigate = useNavigate();
+
+ const [ayahs] = createResource(
+  () => params.id,
+  getSurah
+ );
+
+ const surahName =
+  data.find((s) => s.id === Number(params.id))?.name ??
+  params.id;
+
+ return (
+  <div class="min-h-screen bg-[#171717] text-white">
+
+   <header class="sticky top-0 z-50 bg-[#171717]/90 backdrop-blur border-b border-gray-800">
+
+    <div class="max-w-5xl mx-auto flex items-center justify-between p-5">
+
+     <button
+      onClick={() => navigate(`/`)}
+      class="rounded-full p-2 hover:bg-[#2d2d2d]"
+     >
+      <ArrowLeft class="w-6 h-6" />
+     </button>
+
+
+     <h1 class="text-2xl font-bold">
+      سورة {surahName}
+     </h1>
+
+     <div class="w-10"></div>
+
+    </div>
+
+   </header>
+
+   <main class="max-w-5xl mx-auto py-12 px-8">
+    <Show
+     when={!ayahs.loading}
+     fallback={
+      <p class="text-center text-gray-400">
+       Loading...
+      </p>
+     }
+    >
+     <p class="text-center text-[42px] leading-[2.6]">
+      <For each={ayahs()}>
+       {(ayah, i) => (
+        <>
+         {ayah}
+         <span
+          class="inline-flex items-center justify-center
+                 w-12 h-12 mx-2 rounded-full
+                 border border-teal-500
+                 text-teal-400 text-xl align-middle"
+         >
+          {i() + 1}
+         </span>
+        </>
+       )}
+      </For>
+     </p>
+    </Show>
+   </main>
+  </div>
+ );
+}
