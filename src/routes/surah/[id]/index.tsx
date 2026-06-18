@@ -34,10 +34,22 @@ export default function SurahPage() {
   } catch (err) { }
  };
 
- const saveAyah = (ayah: string) => {
-  const bookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
-  bookmarks.push(ayah);
-  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+
+ const saveAyah = (ayah: string, surahName: string, ayahNum: number) => {
+  const key = "quran_saved_ayahs";
+
+  const bookmarks = JSON.parse(localStorage.getItem(key) || "[]");
+
+  const newItem = {
+   text: ayah,
+   surahName,
+   ayahNum,
+  };
+
+  bookmarks.push(newItem);
+
+  localStorage.setItem(key, JSON.stringify(bookmarks));
+
   toast.success("Ayah saved");
  };
 
@@ -55,10 +67,6 @@ export default function SurahPage() {
 
  return (
   <div class="bg-[#171717] min-h-screen px-6 py-6 text-right">
-
-
-
-
 
    <div class="max-w-3xl mx-auto flex justify-between items-center mb-8">
     <h1 class="text-white text-3xl font-bold">

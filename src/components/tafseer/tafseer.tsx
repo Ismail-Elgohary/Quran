@@ -16,7 +16,6 @@ export default function TafsirSheet(props: any) {
  const surahName = data.find((surah) => surah.id === Number(params.id)
  )?.name ?? params.id;
 
-
  return (
   <Show when={props.open()}>
 
@@ -34,7 +33,7 @@ export default function TafsirSheet(props: any) {
      <div class="flex justify-between items-center mb-4">
 
       <h2 class="text-white text-xl font-bold items-center text-center">
-       رقم  {props.surahNumber}
+       سورة  {props.surahNumber}
       </h2>
 
       <h3 class="text-white text-xl font-bold items-center text-center justify-center mb-4">

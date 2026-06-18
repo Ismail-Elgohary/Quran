@@ -11,7 +11,7 @@ import { createSignal, For, Show } from "solid-js";
 
 const menuItems = [
  { label: "Learn", icon: BookOpen, path: "/surah/1" },
- { label: "bookmarks", icon: Bookmark, path: "/bookmarks" },
+ { label: "bookmarks", icon: Bookmark, path: "/bookmark" },
 ];
 
 export default function Menu() {
