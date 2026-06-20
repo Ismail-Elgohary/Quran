@@ -5,7 +5,6 @@ import { Suspense } from "solid-js";
 import { Toaster } from 'solid-sonner';
 import "./app.css";
 import Header from "./components/Header";
-
 export default function App() {
  return (
 
@@ -19,6 +18,7 @@ export default function App() {
      />
      <Header />
      <Suspense>{props.children}</Suspense>
+
     </MetaProvider>
    )}
   >

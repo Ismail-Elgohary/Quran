@@ -1,28 +1,34 @@
+import { createSignal } from "solid-js";
+
 let currentAudio: HTMLAudioElement | null = null;
-let currentAyah: string | null = null;
-let currentListen: (() => void)[] = [];
 
-const notify = () => currentListen.forEach((e) => e());
+const [currentAyah, setCurrentAyah] = createSignal<string | null>(null);
+const [playing, setPlaying] = createSignal(false);
 
-export const subscribeAudio = (e: () => void) => {
- currentListen.push(e);
-};
+const [duration, setDuration] = createSignal(0);
+const [currentTime, setCurrentTime] = createSignal(0);
 
+export { currentAyah, currentTime, duration, playing };
 
-export const playAudio = async (surahId: string, ayahNumber: number) => {
-
+export const playAudio = async (
+ surahId: string,
+ ayahNumber: number
+) => {
  const ayahKey = `${surahId}:${ayahNumber}`;
 
- if (currentAudio && currentAyah === ayahKey) {
+ // toggle نفس الآية
+ if (currentAudio && currentAyah() === ayahKey) {
   if (currentAudio.paused) {
    await currentAudio.play();
+   setPlaying(true);
   } else {
    currentAudio.pause();
+   setPlaying(false);
   }
-  notify();
   return;
  }
 
+ // stop old audio
  if (currentAudio) {
   currentAudio.pause();
   currentAudio.currentTime = 0;
@@ -31,38 +37,53 @@ export const playAudio = async (surahId: string, ayahNumber: number) => {
  const res = await fetch(
   `https://api.alquran.cloud/v1/ayah/${surahId}:${ayahNumber}/ar.husary`
  );
+
  const data = await res.json();
- const audio = new Audio(data.data.audio);
 
- currentAudio = audio;
- currentAyah = ayahKey;
+ currentAudio = new Audio(data.data.audio);
 
- notify();
+ setCurrentAyah(ayahKey);
 
- await audio.play();
-
- audio.onended = () => {
-  currentAudio = null;
-  currentAyah = null;
-  notify();
+ currentAudio.ontimeupdate = () => {
+  setCurrentTime(currentAudio?.currentTime || 0);
  };
+
+ currentAudio.onloadedmetadata = () => {
+  setDuration(currentAudio?.duration || 0);
+ };
+
+ currentAudio.onplay = () => setPlaying(true);
+ currentAudio.onpause = () => setPlaying(false);
+
+ currentAudio.onended = () => {
+  setPlaying(false);
+  setCurrentAyah(null);
+  currentAudio = null;
+  setCurrentTime(0);
+ };
+
+ await currentAudio.play();
 };
 
 export const pauseAudio = () => {
  if (!currentAudio) return;
+
  currentAudio.pause();
- currentAudio.currentTime = 0;
- currentAudio = null;
- currentAyah = null;
- notify();
+ setPlaying(false);
+};
+
+export const seekAudio = (time: number) => {
+ if (!currentAudio) return;
+
+ currentAudio.currentTime = time;
+ setCurrentTime(time);
 };
 
 export const getSurah = async (id: string) => {
  const res = await fetch(`https://quranapi.pages.dev/api/${id}.json`);
 
- if (!res.ok) {
-  throw new Error(`Faild: ${res.status}`);
- }
+ if (!res.ok) throw new Error(`Faild: ${res.status}`);
+
  const data = await res.json();
  return data.arabic1 as string[];
 };
@@ -70,9 +91,7 @@ export const getSurah = async (id: string) => {
 export const getFullSurah = async (id: string) => {
  const res = await fetch(`https://api.alquran.cloud/v1/surah/${id}`);
 
- if (!res.ok) {
-  throw new Error(`Failed: ${res.status}`);
- }
+ if (!res.ok) throw new Error(`Failed: ${res.status}`);
 
  const data = await res.json();
 

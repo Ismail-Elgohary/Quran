@@ -12,7 +12,6 @@ export default function SurahPage() {
  const params = useParams();
  const [open, setOpen] = createSignal(false);
  const [selectedAyah, setSelectedAyah] = createSignal(1);
- const [drawer, setDrawer] = createSignal(false);
  const navigate = useNavigate();
 
  const [ayahs] = createResource(() => params.id, getSurah);
@@ -98,7 +97,6 @@ export default function SurahPage() {
          onSave={saveAyah}
          onPlay={(surahId, ayahNumber) => {
           setSelectedAyah(ayahNumber);
-          setDrawer(true);
           playAudio(surahId, ayahNumber);
          }}
          stopAudio={pauseAudio}
@@ -137,42 +135,8 @@ export default function SurahPage() {
     error={tafseerKathir.error}
    />
 
-   <Show when={drawer()}>
-    <>
-     <div
-      class="fixed inset-0 bg-black/50 z-40"
-      onClick={() => setDrawer(false)}
-     />
-
-     <div class="fixed bottom-0 left-0 right-0 z-50 bg-[#25282d] rounded-t-3xl p-6">
-
-      <div class="flex justify-between items-center mb-4">
-       <h2 class="text-white font-bold">
-        Ayah {selectedAyah()}
-       </h2>
-
-       <button
-        class="text-white"
-        onClick={() => setDrawer(false)}
-       >
-        ✕
-       </button>
-      </div>
-
-      <div class="flex justify-center gap-4">
-
-       <button
-        class="bg-[#24898f] px-7 py-3 rounded-full text-white"
-        onClick={() =>
-         playAudio(params.id, selectedAyah())
-        }
-       >
-        Play
-       </button>
-      </div>
-     </div>
-    </>
-   </Show>
+   <div class="flex justify-between items-center mb-4">
+   </div>
   </div>
  );
 }
