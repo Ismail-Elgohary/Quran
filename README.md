@@ -1,5 +1,8 @@
 # SolidStart
 
+netlify server
+https://quran-eg.netlify.app/
+
 Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
 
 ## Creating a project
@@ -31,3 +34,5 @@ By default, `npm run build` will generate a Node app that you can run with `npm 
 
 ## This project was created with the [Solid CLI](https://github.com/solidjs-community/solid-cli)
 # Quran
+
+
