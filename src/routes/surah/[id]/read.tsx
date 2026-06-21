@@ -3,7 +3,7 @@ import { ArrowLeft, Minus, Pause, Play, Plus } from "lucide-solid";
 import { createResource, createSignal, For, Show } from "solid-js";
 
 import { getSurah } from "../../../api/data";
-import { playing, playSurah } from "../../../api/fullsurah";
+import { playing, playSurah, reciterId, recitersList, setReciterId } from "../../../api/fullsurah";
 import { data } from "../../../api/surahname";
 
 export default function Read() {
@@ -38,6 +38,17 @@ export default function Read() {
      </h1>
 
      <div class="flex items-center gap-4">
+      <select
+       value={reciterId()}
+       onChange={(e) => setReciterId(Number(e.target.value))}
+       class="bg-[#2d2d2d] text-white p-2 rounded border border-gray-700 outline-none text-sm cursor-pointer"
+      >
+       <For each={recitersList}>
+        {(reciter) => (
+         <option value={reciter.id}>{reciter.name}</option>
+        )}
+       </For>
+      </select>
 
       <div class="flex gap-2">
        <button onClick={decrease} class="p-2 hover:bg-[#2d2d2d] rounded">

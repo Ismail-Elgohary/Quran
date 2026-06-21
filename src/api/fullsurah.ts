@@ -1,7 +1,15 @@
 import { createSignal } from "solid-js";
 
 export const [playing, setPlaying] = createSignal(false);
-export const [reciterId, setReciterId] = createSignal(9);
+export const [reciterId, setReciterId] = createSignal(1);
+
+export const recitersList = [
+ { id: 1, name: "عبد الباسط عبد الصمد مجود" },
+ { id: 2, name: "عبد الباسط عبد الصمد مرتل" },
+ { id: 6, name: "محمود خليل  الحصري مرتل" },
+ { id: 9, name: "محمد صديق المنشاةي مرتل" },
+ { id: 12, name: "محمود خليل الحصري معلم" },
+];
 
 let audio: HTMLAudioElement | null = null;
 let currentSurah: number | null = null;
@@ -29,7 +37,8 @@ export const playSurah = async (surahId: number) => {
 
  try {
   const response = await fetch(
-   `https://api.quran.com/api/v4/chapter_recitations/${numericReciterId}/${numericSurahId}`);
+   `https://api.quran.com/api/v4/chapter_recitations/${numericReciterId}/${numericSurahId}`
+  );
   const result = await response.json();
   const audioUrl = result.audio_file.audio_url;
 

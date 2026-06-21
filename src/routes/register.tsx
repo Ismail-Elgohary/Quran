@@ -1,5 +1,8 @@
 import { useNavigate } from "@solidjs/router";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { createSignal, onMount } from "solid-js";
+import { toast } from "solid-sonner";
+import { auth } from "../lib/firebase";
 
 export default function Register() {
  const [name, setName] = createSignal("");
@@ -7,12 +10,26 @@ export default function Register() {
  const [password, setPassword] = createSignal("");
  const [cpassword, setCpassword] = createSignal("");
  const [selected, setSelected] = createSignal("signUp");
-
  const navigate = useNavigate();
 
- onMount(() => {
-  navigate("/register", { replace: true });
- });
+
+ const register = async (e: Event) => {
+  e.preventDefault();
+
+  try {
+   await createUserWithEmailAndPassword(
+    auth,
+    email(),
+    password()
+   );
+
+   toast.success("Account created successfully");
+
+   navigate("/");
+  } catch (error: any) {
+   toast.error(error.message);
+  }
+ };
 
  return (
   <div class="min-h-screen flex items-center justify-center bg-[#1f2125] p-6">
@@ -60,7 +77,10 @@ export default function Register() {
      </button>
     </div>
 
-    <form class="flex flex-col gap-4">
+    <form
+     class="flex flex-col gap-4"
+     onSubmit={register}
+    >
      <input
       value={name()}
       onInput={(e) => setName(e.currentTarget.value)}

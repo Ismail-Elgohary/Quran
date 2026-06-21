@@ -1,5 +1,9 @@
 import { useNavigate } from "@solidjs/router";
-import { createSignal, onMount } from "solid-js";
+import { createSignal } from "solid-js";
+
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "solid-sonner";
+import { auth } from "../lib/firebase";
 
 export default function Login() {
  const [email, setEmail] = createSignal("");
@@ -8,9 +12,23 @@ export default function Login() {
 
  const navigate = useNavigate();
 
- onMount(() => {
-  navigate("/login", { replace: true });
- });
+ const login = async (e: Event) => {
+  e.preventDefault();
+
+  try {
+   await signInWithEmailAndPassword(
+    auth,
+    email(),
+    password()
+   );
+
+   toast.success("Login successful");
+
+   navigate("/");
+  } catch (error: any) {
+   toast.error(error.message);
+  }
+ };
 
  return (
   <div class="min-h-screen flex items-center justify-center bg-[#1f2125] p-6">
@@ -58,7 +76,10 @@ export default function Login() {
      </button>
     </div>
 
-    <form class="flex flex-col gap-4">
+    <form
+     class="flex flex-col gap-4"
+     onSubmit={login}
+    >
      <input
       value={email()}
       onInput={(e) => setEmail(e.currentTarget.value)}
