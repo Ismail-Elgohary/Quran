@@ -8,7 +8,11 @@ type IconsProps = {
  isLoading: boolean;
  isPlaying: boolean;
  onCopy: (text: string) => void;
- onSave: (text: string) => void;
+ onSave: (
+  text: string,
+  surahName: string,
+  ayahNum: number
+ ) => void;
  onPlay: (surahId: string, ayahNumber: number) => void;
  stopAudio: () => void;
 };
@@ -40,7 +44,13 @@ export default function Icons(props: IconsProps) {
     </Show>
 
     <Bookmark
-     onClick={() => props.onSave(props.ayah)}
+     onClick={() =>
+      props.onSave(
+       props.ayah,
+       props.surahName,
+       props.ayahNumber
+      )
+     }
      size={25}
      class="hover:text-teal-400 transition-all cursor-pointer"
     />

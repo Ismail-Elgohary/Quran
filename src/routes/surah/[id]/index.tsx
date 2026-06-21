@@ -1,4 +1,6 @@
 import { useNavigate, useParams } from "@solidjs/router";
+import { getAuth } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 import { BookOpen } from "lucide-solid";
 import { createResource, createSignal, For, Show } from "solid-js";
 import { toast } from "solid-sonner";
@@ -7,6 +9,7 @@ import { data } from "../../../api/surahname";
 import { tafseerKather, tafsirQurtubi } from "../../../api/tafseer";
 import Icons from "../../../components/icons";
 import TafsirPage from "../../../components/tafseer/tafseer";
+import { db } from "../../../lib/firebase";
 
 export default function SurahPage() {
  const params = useParams();
@@ -33,23 +36,38 @@ export default function SurahPage() {
   } catch (err) { }
  };
 
+ const saveAyah = async (
+  ayah: string,
+  surahName: string,
+  ayahNum: number
+ ) => {
+  const user = getAuth().currentUser;
 
- const saveAyah = (ayah: string, surahName: string, ayahNum: number) => {
-  const key = "quran_saved_ayahs";
+  console.log("USER:", user);
 
-  const bookmarks = JSON.parse(localStorage.getItem(key) || "[]");
+  if (!user) {
+   toast.error("Please login first");
+   return;
+  }
 
-  const newItem = {
-   text: ayah,
-   surahName,
-   ayahNum,
-  };
+  try {
+   const data = {
+    userId: user.uid,
+    text: ayah,
+    surahName,
+    ayahNum,
+    createdAt: Date.now(),
+   };
 
-  bookmarks.push(newItem);
+   console.log("BOOKMARK DATA:", data);
 
-  localStorage.setItem(key, JSON.stringify(bookmarks));
+   await addDoc(collection(db, "bookmarks"), data);
 
-  toast.success("Ayah saved");
+   toast.success("Ayah saved");
+  } catch (error: any) {
+   console.error("FIRESTORE ERROR:", error);
+   toast.error(error.message || "Failed to save ayah");
+  }
  };
 
  const getTafsirKathir = () => {
@@ -91,6 +109,7 @@ export default function SurahPage() {
 
         <Icons
          surahId={params.id}
+         surahName={surahName}
          ayahNumber={i() + 1}
          ayah={ayah}
          onCopy={copyAyah}

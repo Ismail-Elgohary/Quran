@@ -1,23 +1,47 @@
+import { getAuth } from "firebase/auth";
+import {
+ collection,
+ deleteDoc,
+ doc,
+ getDocs,
+ query,
+ where,
+} from "firebase/firestore";
 import { createSignal, For, onMount, Show } from "solid-js";
+
+import { db } from "../lib/firebase";
 
 export default function Bookmark() {
  const [activeTab, setActiveTab] = createSignal("saved");
  const [savedAyahs, setSavedAyahs] = createSignal<any[]>([]);
 
- const STORAGE_KEY = "quran_saved_ayahs";
 
- onMount(() => {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) setSavedAyahs(JSON.parse(saved));
+ onMount(async () => {
+  const user = getAuth().currentUser;
+
+  if (!user) return;
+
+  const q = query(
+   collection(db, "bookmarks"),
+   where("userId", "==", user.uid)
+  );
+
+  const snapshot = await getDocs(q);
+
+  const bookmarks = snapshot.docs.map((doc) => ({
+   id: doc.id,
+   ...doc.data(),
+  }));
+
+  setSavedAyahs(bookmarks);
  });
 
- const removeAyah = (index: number) => {
-  const current = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+ const removeAyah = async (id: string) => {
+  await deleteDoc(doc(db, "bookmarks", id));
 
-  const updated = current.filter((_: any, i: number) => i !== index);
-
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  setSavedAyahs(updated);
+  setSavedAyahs((prev) =>
+   prev.filter((item) => item.id !== id)
+  );
  };
 
  return (
@@ -53,7 +77,7 @@ export default function Bookmark() {
         </p>
        }
       >
-       {(item, index) => (
+       {(item) => (
         <div class="bg-[#222] p-5 rounded-xl border-r-4 border-teal-500 flex justify-between items-start">
 
          <div>
@@ -67,7 +91,7 @@ export default function Bookmark() {
          </div>
 
          <button
-          onClick={() => removeAyah(index())}
+          onClick={() => removeAyah(item.id)}
           class="text-red-500 hover:text-red-400 p-2 rounded-full hover:bg-red-500/10 transition-colors"
           title="Delete"
          >
