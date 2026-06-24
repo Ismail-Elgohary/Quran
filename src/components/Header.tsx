@@ -60,7 +60,7 @@ export default function Header() {
 
          <button
           onClick={() => navigate("/profile")}
-          class="w-full text-left px-4 py-3 hover:bg-[#333]"
+          class="w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-700/100"
          >
           Profile
          </button>

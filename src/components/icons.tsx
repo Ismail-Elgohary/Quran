@@ -4,6 +4,7 @@ import { Show } from "solid-js";
 type IconsProps = {
  surahId: string | number | undefined;
  ayahNumber: number;
+ surahName: string;
  ayah: string;
  isLoading: boolean;
  isPlaying: boolean;
