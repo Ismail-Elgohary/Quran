@@ -104,14 +104,15 @@ export default function Login() {
      </button>
 
      <button
+      onClick={() => navigate("/forgetpassword")}
       type="button"
-      class="text-sm text-gray-400 hover:text-white"
+      class="text-sm text-gray-400 hover:text-white cursor-pointer"
      >
       Forgot Password?
      </button>
 
     </form>
    </div>
-  </div>
+  </div >
  );
 }
