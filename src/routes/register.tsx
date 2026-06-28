@@ -32,15 +32,15 @@ export default function Register() {
  };
 
  return (
-  <div class="min-h-screen flex items-center justify-center bg-[#1f2125] p-6">
-   <div class="w-full max-w-md bg-[#25282d] rounded-3xl p-8 shadow-xl">
+  <div class="min-h-screen flex items-center justify-center bg-background p-6">
+   <div class="w-full max-w-md bg-card rounded-3xl p-8 shadow-xl">
 
     <div class="text-center mb-8">
-     <h1 class="text-3xl font-bold text-white">
+     <h1 class="text-3xl font-bold text-muted-foreground">
       Welcome To Quran
      </h1>
 
-     <p class="text-gray-400 mt-2">
+     <p class="text-muted-foreground mt-2">
       Sign in or create an account to continue your Quran journey.
      </p>
     </div>
@@ -48,10 +48,10 @@ export default function Register() {
     <div class="flex gap-4 mb-6">
      <button
       type="button"
-      class="w-full py-3 rounded-full font-semibold transition"
-      classList={{
-       "bg-[#080809] text-white": selected() === "signIn",
-       "bg-[#343a40] text-[#dee2e6]": selected() !== "signIn",
+       class="w-full py-3 rounded-full font-semibold transition"
+       classList={{
+       "bg-tab-active text-tab-active-foreground": selected() === "signIn",
+       "bg-tab text-tab-foreground": selected() !== "signIn",
       }}
       onClick={() => {
        setSelected("signIn");
@@ -63,10 +63,10 @@ export default function Register() {
 
      <button
       type="button"
-      class="w-full py-3 rounded-full font-semibold transition"
-      classList={{
-       "bg-[#080809] text-white": selected() === "signUp",
-       "bg-[#343a40] text-[#dee2e6]": selected() !== "signUp",
+       class="w-full py-3 rounded-full font-semibold transition"
+       classList={{
+       "bg-tab-active text-tab-active-foreground": selected() === "signUp",
+       "bg-tab text-tab-foreground": selected() !== "signUp",
       }}
       onClick={() => {
        setSelected("signUp");
@@ -86,7 +86,7 @@ export default function Register() {
       onInput={(e) => setName(e.currentTarget.value)}
       type="text"
       placeholder="Name"
-      class="w-full px-4 py-3 rounded-xl bg-[#1f2125] text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400 border border-[#3a3a3a]"
+      class="w-full px-4 py-3 rounded-xl bg-background text-foreground placeholder:text-placeholder focus:outline-none focus:ring-2 focus:ring-foucs border border-border"
      />
 
      <input
@@ -94,7 +94,7 @@ export default function Register() {
       onInput={(e) => setEmail(e.currentTarget.value)}
       type="email"
       placeholder="Email"
-      class="w-full px-4 py-3 rounded-xl bg-[#1f2125] text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400 border border-[#3a3a3a]"
+      class="w-full px-4 py-3 rounded-xl bg-background text-foreground placeholder:text-placeholder focus:outline-none focus:ring-2 focus:ring-foucs border border-border"
      />
 
      <input
@@ -102,18 +102,18 @@ export default function Register() {
       onInput={(e) => setPassword(e.currentTarget.value)}
       type="password"
       placeholder="Password"
-      class="w-full px-4 py-3 rounded-xl bg-[#1f2125] text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400 border border-[#3a3a3a]"
+      class="w-full px-4 py-3 rounded-xl bg-background text-foreground placeholder:text-placeholder focus:outline-none focus:ring-2 focus:ring-foucs border border-border"
      />
      <input
       value={cpassword()}
       onInput={(e) => setCpassword(e.currentTarget.value)}
       type="password"
       placeholder="Confirm Password"
-      class="w-full px-4 py-3 rounded-xl bg-[#1f2125] text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400 border border-[#3a3a3a]"
+      class="w-full px-4 py-3 rounded-xl bg-background text-foreground placeholder:text-placeholder focus:outline-none focus:ring-2 focus:ring-foucs border border-border"
      />
      <button
       type="submit"
-      class="w-full py-3 rounded-xl bg-[#2ca4ab] text-white font-semibold"
+      class="w-full py-3 rounded-xl bg-foucs text-foreground font-semibold cusror-pointer"
      >
       Sign Up
      </button>

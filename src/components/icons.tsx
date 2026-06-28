@@ -23,8 +23,8 @@ export default function Icons(props: IconsProps) {
  return (
 
   <div class="flex items-center justify-between mb-6">
-   <div class="flex items-center gap-3 text-gray-400">
-    <span class="text-xl font-bold cursor-pointer hover:text-teal-400">
+   <div class="flex items-center gap-3 text-foreground">
+    <span class="text-xl font-bold cursor-pointer hover:text-foucs">
      {props.surahId}:{props.ayahNumber}
     </span>
 
@@ -33,14 +33,14 @@ export default function Icons(props: IconsProps) {
       <Play
        size={25}
        onClick={() => props.onPlay(props.surahId as string, props.ayahNumber)}
-       class="hover:text-teal-400 transition-all cursor-pointer"
+       class="hover:text-foucs transition-all cursor-pointer"
       />
      }
     >
      <Pause
       onClick={props.stopAudio}
       size={25}
-      class="hover:text-teal-400 transition-all cursor-pointer"
+      class="hover:text-foucs transition-all cursor-pointer"
      />
     </Show>
 
@@ -53,7 +53,7 @@ export default function Icons(props: IconsProps) {
       )
      }
      size={25}
-     class="hover:text-teal-400 transition-all cursor-pointer"
+     class="hover:text-foucs transition-all cursor-pointer"
     />
    </div>
 
@@ -62,12 +62,7 @@ export default function Icons(props: IconsProps) {
     <Copy
      onClick={() => props.onCopy(props.ayah)}
      size={25}
-     class="text-gray-400 hover:text-teal-400 transition-all cursor-pointer"
-    />
-
-    <Share2
-     size={25}
-     class="text-gray-400 hover:text-teal-400 transition-all cursor-pointer"
+     class="text-foreground hover:text-foucs transition-all cursor-pointer"
     />
    </div>
   </div >

@@ -24,23 +24,23 @@ export default function Menu() {
    <List
     size={28}
     onClick={toggle}
-    class="text-[#e7e9ea] hover:text-teal-400 cursor-pointer transition-all"
+    class="text-foreground hover:text-foucs cursor-pointer transition-all"
    />
 
    <Show when={open()}>
     <div
-     class="fixed inset-0 bg-black/50 z-40"
+     class="fixed inset-0 bg-bg-list z-40"
      onClick={toggle}
     />
 
-    <div class="fixed top-0 right-0 h-full w-80 bg-[#171717] z-50 flex flex-col shadow-xl animate-in slide-in-from-right">
+    <div class="fixed top-0 right-0 h-full w-80 bg-surface z-50 flex flex-col shadow-xl animate-in slide-in-from-right">
 
-     <div class="flex items-center justify-between px-6 py-5 border-b border-gray-800">
-      <h1 class="text-white text-2xl font-bold">Quran.com</h1>
+     <div class="flex items-center justify-between px-6 py-5 border-b border-border">
+      <h1 class="text-foreground text-2xl font-bold">Quran.com</h1>
       <X
        size={24}
        onClick={toggle}
-       class="text-gray-400 hover:text-teal-400 cursor-pointer transition-all"
+       class="text-muted-foreground hover:text-foucs cursor-pointer transition-all"
       />
      </div>
 
@@ -52,7 +52,7 @@ export default function Menu() {
           navigate(item.path);
           toggle();
          }}
-         class="flex items-center gap-4 px-6 py-4 text-gray-200 hover:text-teal-400 cursor-pointer transition-all text-lg"
+         class="flex items-center gap-4 px-6 py-4 text-muted-foreground hover:text-foucs cursor-pointer transition-all text-lg"
         >
          <item.icon size={22} />
          <span>{item.label}</span>
@@ -61,12 +61,12 @@ export default function Menu() {
       </For>
      </div>
 
-     <div class="border-t border-gray-800 p-4 flex items-center justify-between">
-      <button class="flex items-center gap-2 text-gray-300 hover:text-teal-400 transition-all">
+     <div class="border-t border-border p-4 flex items-center justify-between">
+      <button class="flex items-center gap-2 text-muted-foreground hover:text-foucs transition-all">
        <Globe size={18} />
        Arabic
       </button>
-      <button class="flex items-center gap-2 text-gray-300 hover:text-teal-400 transition-all">
+      <button class="flex items-center gap-2 text-muted-foreground hover:text-foucs transition-all">
        <Moon size={18} />
        Theme
       </button>

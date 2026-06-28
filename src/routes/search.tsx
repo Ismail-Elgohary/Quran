@@ -25,8 +25,8 @@ export default function SurahSearch() {
    <div class="relative">
 
     <input
-     class="w-full p-4 rounded-xl bg-[#171717] text-white
-     border border-gray-700 focus:border-teal-500 outline-none"
+     class="w-full p-4 rounded-xl bg-surface text-primary-foreground
+     border border-border focus:border-foucs outline-none"
      placeholder="Search Surah..."
      value={search()}
      onInput={(e) => setSearch(e.currentTarget.value)}
@@ -34,13 +34,13 @@ export default function SurahSearch() {
 
     <Show when={search().trim().length > 0}>
 
-     <div class="absolute left-0 right-0 mt-2 bg-[#171717] border border-gray-700
-      rounded-xl shadow-lg z-50 text-[#e7e9ea]">
+     <div class="absolute left-0 right-0 mt-2 bg-background border border-border
+      rounded-xl shadow-lg z-50 text-foreground">
 
       <Show
        when={filtered().length > 0}
        fallback={
-        <div class="p-3 text-white text-center">
+        <div class="p-3 text-primary-foreground text-center">
          No results found
         </div>
        }
@@ -49,11 +49,11 @@ export default function SurahSearch() {
         {(surah) => (
          <div
           class="p-3 flex justify-between cursor-pointer
-           hover:bg-[#474747] transition"
+           hover:bg-placeholder transition"
           onClick={() => goToSurah(surah.id)}
          >
           <span>{surah.name}</span>
-          <span class="text-[#e7e9ea] text-lg">#{surah.id}</span>
+          <span class="text-foreground text-lg">#{surah.id}</span>
          </div>
         )}
        </For>

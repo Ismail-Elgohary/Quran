@@ -1,1 +1,52 @@
 @import "tailwindcss";
+
+:root{
+  --color-surface:    #171717;
+  --color-background: #1f2125;
+  --color-foreground: #e7e9ea;
+  --color-primary-foreground: #ffffff;
+  --color-primary: #24898f;
+  --color-card:    #25282d;
+  --color-muted-foreground: #d1d5db;
+  --color-border: #374151;
+  --color-placeholder: #6b7280;
+  --color-foucs:   #2ca4ab;
+  --color-bg-span: #78350f;
+  --color-span:    #fcd34d;
+  --color-bg-btn:  #1e3a8a;
+  --color-btn:     #93c5fd;
+  --color-bg-list: #00000080;
+  --color-bg-icon: #2d2d2d;   
+  --color-destructive: #f87171;
+  --color-destructive-hover: rgba(239,68,68,.1);
+    
+  --color-tab-active: #080809;
+  --color-tab-active-foreground: #ffff;
+  --color-tab: #343a40;
+  --color-tab-foreground: white;
+}
+
+@theme{
+  --color-background:         var(--color-background);
+  --color-surface:            var(--color-surface);
+  --color-foreground:         var(--color-foreground);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-muted-foreground:   var(--color-muted-foreground);
+  --color-primary:            var(--color-primary);
+  --color-border:             var(--color-border);
+  --color-placeholder:        var(--color-placeholder);
+  --color-foucs:              var(--color-foucs);
+  --color-bg-span:            var(--color-bg-span);
+  --color-span:               var(--color-span);
+  --color-bg-btn:             var(--color-bg-btn);
+  --color-btn:                var(--color-btn);
+  --color-bg-list:            var(--color-bg-list);
+  --color-bg-icon:            var(--color-bg-icon);  
+  --color-destructive:        var(--color-destructive);
+  --color-destructive-hover:  var(--color-destructive-hover);
+  
+  --color-tab:                var(--color-tab);
+  --color-tab-foreground:     var(--color-tab-foreground);
+  --color-tab-active:         var(--color-tab-active);
+  --color-tab-active-foreground: var(--color-tab-active-foreground);
+}

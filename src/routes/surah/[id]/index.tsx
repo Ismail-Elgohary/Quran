@@ -83,16 +83,16 @@ export default function SurahPage() {
  )?.name ?? params.id;
 
  return (
-  <div class="bg-[#171717] min-h-screen px-6 py-6 text-right">
+  <div class="bg-background min-h-screen px-6 py-6 text-right">
 
    <div class="max-w-3xl mx-auto flex justify-between items-center mb-8">
-    <h1 class="text-white text-3xl font-bold">
+    <h1 class="text-foreground text-3xl font-bold">
      سورة {surahName}
     </h1>
 
     <button
-     class="flex items-center gap-2 bg-[#24898f] hover:bg-[#1f777d]
-           transition px-5 py-2 rounded-full text-white"
+     class="flex items-center gap-2 bg-primary hover:bg-foucs
+           transition px-5 py-2 rounded-full text-foreground"
      onClick={() => navigate(`/surah/${params.id}/read`)}
     >
      📖
@@ -101,7 +101,7 @@ export default function SurahPage() {
    </div>
 
    <Show when={!ayahs.loading && ayahs()}>
-    <div class="max-w-3xl mx-auto divide-y divide-gray-800">
+    <div class="max-w-3xl mx-auto divide-y divide-border">
 
      <For each={ayahs()}>
       {(ayah, i) => (
@@ -121,12 +121,12 @@ export default function SurahPage() {
          stopAudio={pauseAudio}
         />
 
-        <p class="text-white text-3xl leading-loose text-right mb-6">
+        <p class="text-foreground text-3xl leading-loose text-right mb-6">
          {ayah}
         </p>
 
         <button
-         class="flex items-center gap-2 text-gray-400 hover:text-teal-400 font-bold"
+         class="flex items-center gap-2 text-foreground hover:text-foucs font-bold"
          onClick={() => {
           setSelectedAyah(i() + 1);
           setOpen(true);

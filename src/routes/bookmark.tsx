@@ -45,19 +45,19 @@ export default function Bookmark() {
  };
 
  return (
-  <div class="bg-[#171717] min-h-screen text-white p-5" dir="rtl">
+  <div class="bg-background min-h-screen text-foreground p-5" dir="rtl">
 
-   <h1 class="text-center text-teal-500 mt-5 font-bold text-2xl mb-6">
+   <h1 class="text-center text-foucs mt-5 font-bold text-2xl mb-6">
     your bookmarkes
    </h1>
 
-   <header class="w-full bg-[#222] p-4 rounded-xl flex justify-center gap-4">
+   <header class="w-full bg-surface p-4 rounded-xl flex justify-center gap-4">
     <button
      onClick={() => setActiveTab("saved")}
      class="px-6 py-2 rounded-full"
      classList={{
-      "bg-[#080809] text-white": activeTab() === "saved",
-      "bg-[#343a40] text-[#dee2e6]": activeTab() !== "saved",
+      "bg-tab-active text-tab-active-foreground": activeTab() === "saved",
+     "bg-tab text-tab-foreground": activeTab() !== "saved",
      }}
     >
      Saved
@@ -72,27 +72,27 @@ export default function Bookmark() {
       <For
        each={savedAyahs()}
        fallback={
-        <p class="text-center text-gray-500">
+        <p class="text-center text-foreground">
          you haven't saved any ayahs yet
         </p>
        }
       >
        {(item) => (
-        <div class="bg-[#222] p-5 rounded-xl border-r-4 border-teal-500 flex justify-between items-start">
+        <div class="bg-surface p-5 rounded-xl border-r-4 border-foucs flex justify-between items-start">
 
          <div>
           <p class="text-xl font-semibold mb-2">
            {item.text}
           </p>
 
-          <span class="text-xs text-teal-400">
+          <span class="text-xs text-foucs">
            سورة {item.surahName} - آية {item.ayahNum}
           </span>
          </div>
 
          <button
           onClick={() => removeAyah(item.id)}
-          class="text-red-500 hover:text-red-400 p-2 rounded-full hover:bg-red-500/10 transition-colors"
+          class="text-destructive hover:text-destructive p-2 rounded-full hover:bg-destructive-hover transition-colors"
           title="Delete"
          >
           🗑️

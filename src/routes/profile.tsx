@@ -48,11 +48,11 @@ export default function Profile() {
  };
 
  return (
-  <div class="min-h-screen bg-[#171717] text-white p-6">
+  <div class="min-h-screen bg-background text-primary-foreground p-6">
    <div class="max-w-md mx-auto">
 
-    <div class="bg-[#222] rounded-3xl p-8 text-center shadow-xl">
-     <div class="w-24 h-24 mx-auto rounded-full bg-[#2ca4ab] flex items-center justify-center text-3xl font-bold mb-4">
+    <div class="bg-card rounded-3xl p-8 text-center shadow-xl">
+     <div class="w-24 h-24 mx-auto rounded-full bg-foucs flex items-center justify-center text-3xl font-bold mb-4">
       {user?.email?.charAt(0).toUpperCase()}
      </div>
 
@@ -60,7 +60,7 @@ export default function Profile() {
       {user?.displayName || "Quran User"}
      </h1>
 
-     <p class="text-gray-400 mt-2">
+     <p class="text-foreground mt-2">
       {user?.email}
      </p>
     </div>
@@ -69,14 +69,14 @@ export default function Profile() {
 
      <button
       onClick={logout}
-      class="w-full py-3 rounded-xl bg-teal-600 text-white font-semibold cursor-pointer"
+      class="w-full py-3 rounded-xl bg-foucs text-primary-foreground font-semibold cursor-pointer"
      >
       Logout
      </button>
 
      <button
       onClick={removeUser}
-      class="w-full py-3 rounded-xl border border-red-600 bg-red-600 font-semibold cursor-pointer"
+       class="w-full py-3 rounded-xl bg-destructive hover:bg-destructive-hover font-semibold cursor-pointer"
      >
       Delete Account
      </button>

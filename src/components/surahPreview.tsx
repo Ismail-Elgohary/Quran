@@ -27,12 +27,12 @@ export default function SurahPreview() {
 
  return (
   <>
-   <main class="min-h-screen bg-[#171717] text-white p-6">
-    <h2 class="text-white text-3xl font-bold text-center mb-8">السور</h2>
+   <main class="min-h-screen bg-surface text-primary-foreground p-6">
+    <h2 class="text-foreground text-3xl font-bold text-center mb-8">السور</h2>
 
     <Show when={loading()}>
      <div class="flex justify-center py-20">
-      <p class="text-teal-400 text-xl">loading...</p>
+      <p class="text-primary text-xl">loading...</p>
      </div>
     </Show>
 
@@ -42,25 +42,25 @@ export default function SurahPreview() {
        {(surah, index) => (
         <div
          onClick={() => navigate(`/surah/${index() + 1}`)}
-         class="bg-[#171717] border border-gray-50 hover:border-teal-500  rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all duration-300"
+         class="bg-background border border-border hover:border-foucs rounded-xl p-4 flex flex-col items-center gap-2 cursor-pointer transition-all duration-300"
         >
-         <div class="w-9 h-9 rounded-full bg-gray-200  flex items-center justify-center">
-          <span class="text-black font-bold text-lg">
+         <div class="w-9 h-9 rounded-full bg-muted-foreground flex items-center justify-center">
+          <span class="text-surface font-bold text-lg">
            {index() + 1}
           </span>
          </div>
-         <p class="text-white font-bold text-lg text-center">
+         <p class="text-primary-foreground font-bold text-lg text-center">
           {surah.surahNameArabic}
          </p>
-         <p class="text-teal-400 text-xs text-center">
+         <p class="text-foucs text-xs text-center">
           {surah.surahNameTranslation}
          </p>
          <span
-          class={`text-xs px-2 py-0.5 rounded-full ${surah.revelationPlace === "Mecca" ? "bg-amber-900 text-amber-300" : "bg-blue-900 text-blue-300"}`}
+          class={`text-xs px-2 py-0.5 rounded-full ${surah.revelationPlace === "Mecca" ? "bg-bg-span text-text-span" : "bg-bg-btn text-btn"}`}
          >
           {surah.revelationPlace === "Mecca" ? "مكية" : "مدنية"}
          </span>
-         <p class="text-gray-400 text-xs">{surah.totalAyah} آية</p>
+         <p class="text-primary-foreground text-xs">{surah.totalAyah} آية</p>
         </div>
        )}
       </For>

@@ -23,9 +23,9 @@ export default function Header() {
  };
 
  return (
-  <header class="sticky top-0 left-0 w-full z-50 bg-[#171717] shadow-lg">
+  <header class="sticky top-0 left-0 w-full z-50 bg-background shadow-lg">
    <div class="w-full mx-auto px-6 py-4 flex items-center justify-between">
-    <A href="/" class="text-lg font-extrabold text-[#e7e9ea]">
+    <A href="/" class="text-lg font-extrabold text-foreground">
      Quran
     </A>
     <nav class="flex items-center gap-4 px-6">
@@ -34,7 +34,7 @@ export default function Header() {
       when={user()}
       fallback={
        <button
-        class="rounded-full text-[#24898f] px-4 py-2 text-lg font-medium border border-[#24898f]"
+        class="rounded-full text-primary px-4 py-2 text-lg font-medium border border-primary"
         onClick={() => navigate("/login")}
        >
         Sign in
@@ -46,28 +46,28 @@ export default function Header() {
 
        <button
         onClick={() => setOpen(!open())}
-        class="w-10 h-10 rounded-full bg-[#24898f] text-white font-bold"
+        class="w-10 h-10 rounded-full bg-primary text-white font-bold"
        >
         {user()?.email?.charAt(0).toUpperCase()}
        </button>
 
        <Show when={open()}>
-        <div class="absolute right-0 mt-2 w-48 bg-[#25282d] rounded-xl shadow-lg overflow-hidden">
+        <div class="absolute right-0 mt-2 w-48 bg-card rounded-xl shadow-lg overflow-hidden">
 
-         <div class="px-4 py-3 text-sm text-gray-300 border-b border-gray-700">
+         <div class="px-4 py-3 text-sm text-muted-foreground border-b border-border">
           {user()?.email}
          </div>
 
          <button
           onClick={() => navigate("/profile")}
-          class="w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-700/100"
+          class="w-full text-left px-4 py-3 text-muted-foreground hover:bg-hover"
          >
           Profile
          </button>
 
          <button
           onClick={logout}
-          class="w-full text-left px-4 py-3 text-red-400 hover:bg-red-500/10"
+          class="w-full text-left px-4 py-3 text-destructive hover:bg-destructive-hover"
          >
           Logout
          </button>

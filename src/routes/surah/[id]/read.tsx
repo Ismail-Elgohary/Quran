@@ -20,15 +20,15 @@ export default function Read() {
  const surahName = data.find((s) => s.id === Number(params.id))?.name ?? params.id;
 
  return (
-  <div class="min-h-screen bg-[#171717] text-white" dir="rtl">
+  <div class="min-h-screen bg-background text-foreground" dir="rtl">
 
-   <header class="sticky top-0 z-50 bg-[#171717]/90 backdrop-blur border-b border-gray-800">
+   <header class="sticky top-0 z-50 bg-background backdrop-blur border-b border-border">
 
     <div class="max-w-5xl mx-auto flex items-center justify-between p-5">
 
      <button
       onClick={() => navigate(`/surah/${params.id}`)}
-      class="rounded-full p-2 hover:bg-[#2d2d2d]"
+      class="rounded-full p-2 hover:bg-bg-icon"
      >
       <ArrowLeft class="w-6 h-6 transform rotate-180" />
      </button>
@@ -41,7 +41,7 @@ export default function Read() {
       <select
        value={reciterId()}
        onChange={(e) => setReciterId(Number(e.target.value))}
-       class="bg-[#2d2d2d] text-white p-2 rounded border border-gray-700 outline-none text-sm cursor-pointer"
+       class="bg-background text-foreground p-2 rounded border border-border outline-none text-sm cursor-pointer"
       >
        <For each={recitersList}>
         {(reciter) => (
@@ -51,11 +51,11 @@ export default function Read() {
       </select>
 
       <div class="flex gap-2">
-       <button onClick={decrease} class="p-2 hover:bg-[#2d2d2d] rounded">
+       <button onClick={decrease} class="p-2 hover:bg-bg-icon rounded">
         <Minus />
        </button>
 
-       <button onClick={increase} class="p-2 hover:bg-[#2d2d2d] rounded">
+       <button onClick={increase} class="p-2 hover:bg-bg-icon rounded">
         <Plus />
        </button>
       </div>
@@ -65,7 +65,7 @@ export default function Read() {
     <div class="flex justify-center pb-4">
      <button
       onClick={() => playSurah(Number(params.id))}
-      class="flex items-center gap-2 bg-teal-600 px-5 py-2 rounded-full hover:bg-teal-700 transition"
+      class="flex items-center gap-2 bg-foucs px-5 py-2 rounded-full hover:bg-primary transition"
      >
       <Show when={playing()} fallback={<Play />}>
        <Pause />
@@ -83,7 +83,7 @@ export default function Read() {
 
     <Show
      when={!ayahs.loading}
-     fallback={<p class="text-center text-gray-400">جاري تحميل الآيات...</p>}
+     fallback={<p class="text-center text-foucs">جاري تحميل الآيات...</p>}
     >
      <p
       class="text-center leading-[2.6]"
@@ -95,8 +95,8 @@ export default function Read() {
          {ayah}
          <span class="inline-flex items-center justify-center
               w-12 h-12 mx-2 rounded-full
-              border border-teal-500
-              text-teal-400 text-xl"
+              border border-foucs
+              text-foucs text-xl"
          >
           {i() + 1}
          </span>
