@@ -1,7 +1,7 @@
 # SolidStart
 
-netlify server
-https://quran-eg.netlify.app/
+claudeFare server
+https://be0c0264.quran-f14.pages.dev/
 
 Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
 
